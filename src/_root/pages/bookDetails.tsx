@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getBookDetails } from "../../services/googleBooksApi";
@@ -7,6 +7,11 @@ import BookDetailsSkeleton from "../../components/pages/bookDetailsSkeleton";
 
 const BookDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const {
     data: book,
     isLoading,
@@ -28,7 +33,7 @@ const BookDetails: React.FC = () => {
   const { volumeInfo } = book;
 
   return (
-    <div className='bg-skin-base min-h-screen py-12'>
+    <div className='bg-skin-base min-h-screen py-12 overflow-y-auto'>
       <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
         <a
           href='/#books'
