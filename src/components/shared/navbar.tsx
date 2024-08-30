@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Contact, Home, LibraryBig, Menu, Search, X } from "lucide-react";
-import useScroll from "../libs/useScroll";
+import useScroll from "../../libs/useScroll";
+import SocialGroup from "./socialGroup";
 
 const NavBar = () => {
   const [navClassList, setNavClassList] = useState<string[]>([]);
@@ -117,6 +118,7 @@ const NavBar = () => {
             ))}
           </ul>
         </nav>
+        <SocialGroup placeBottom />
       </div>
     </>
   );
