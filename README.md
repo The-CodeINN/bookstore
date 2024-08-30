@@ -1,50 +1,112 @@
-# React + TypeScript + Vite
+# Book Search Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This web application allows users to search for books using the Google Books API. It provides a user-friendly interface for discovering books based on keywords, displaying search results in an appealing manner, and offering detailed information about each book.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Search Functionality**: Users can enter keywords to search for books.
+- **Visual Results**: Search results display book title, author, publication date, and cover image.
+- **Detailed View**: Clicking on a book provides more details, including description and publisher information.
+- **Infinite Scrolling**: Implements infinite scrolling for seamless browsing of search results.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- React.js with TypeScript
+- React Query for state management and data fetching
+- Tailwind CSS for styling
+- Google Books API for book data
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14.0.0 or later)
+- npm (v6.0.0 or later)
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/book-search-app.git
+   ```
+
+2. Navigate to the project directory:
+   ```
+   cd book-search-app
+   ```
+
+3. Install dependencies:
+   ```
+   npm install
+   ```
+
+4. Create a `.env` file in the root directory and add your Google Books API key:
+   ```
+   REACT_APP_GOOGLE_BOOKS_API_KEY=your_api_key_here
+   ```
+
+### Running the Application
+
+1. Start the development server:
+   ```
+   npm start
+   ```
+
+2. Open your browser and visit `http://localhost:3000`
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── BookCard.tsx
+│   ├── BookList.tsx
+│   ├── LoadMoreButton.tsx
+│   └── SearchBar.tsx
+├── pages/
+│   ├── HomePage.tsx
+│   └── BookDetailPage.tsx
+├── services/
+│   └── googleBooksApi.ts
+├── types/
+│   └── index.ts
+├── libs/
+│   └── queryProvide.ts
+└── App.tsx
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Key Components
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- `BookCard`: Displays individual book information in a card format.
+- `BookList`: Renders the list of books and handles infinite scrolling.
+- `SearchBar`: Allows users to input search queries.
+- `LoadMoreButton`: Triggers loading of more search results.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## API Integration
+
+The application uses the Google Books API to fetch book data. API calls are managed in the `googleBooksApi.ts` file, utilizing React Query for efficient data fetching and caching.
+
+## Styling
+
+Tailwind CSS is used for styling, providing a responsive and modern design. Custom styles are applied where necessary to enhance the visual appeal.
+
+## Error Handling
+
+Basic error handling is implemented for API requests, with user-friendly error messages displayed when issues occur.
+
+## Future Improvements
+
+- Implement unit tests using Jest and React Testing Library.
+- Add filters for advanced search options (e.g., by genre, publication year).
+- Integrate with a backend to allow users to save favorite books.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
