@@ -11,11 +11,11 @@ const BooksSection = () => {
 
   const {
     data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isPending,
-    isError,
+    // fetchNextPage,
+    // hasNextPage,
+    // isFetchingNextPage,
+    // isPending,
+    // isError,
   } = useInfiniteQuery({
     queryKey: ["books", query],
     queryFn: ({ pageParam = 0 }) => searchBooks(query, pageParam),
