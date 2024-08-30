@@ -1,6 +1,6 @@
 import axios from "axios";
 import queryString from "query-string";
-import { Book, SearchResult } from "../types/";
+import { Book, SearchResult } from "../types";
 
 const apiConfig = {
   baseUrl: "https://www.googleapis.com/books/v1/volumes",
