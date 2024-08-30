@@ -12,13 +12,14 @@ const Footer = () => {
           </h2>
           <div className='text-sm'>
             <p className='my-1'>
-              We are an online bookstore that offers a wide selection of books
-              in various genres, including fiction, non-fiction, biographies,
-              and more.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              a voluptate quos voluptates, quia, quidem, cumque quod nemo
+              dolorum
             </p>
             <p>
-              We provide a convenient and enjoyable shopping experience while
-              offering competitive prices and excellent customer service.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              a voluptate quos voluptates, quia, quidem, cumque quod nemo
+              dolorum
             </p>
           </div>
         </div>
