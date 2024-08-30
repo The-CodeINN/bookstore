@@ -50,7 +50,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
           </span>
           <Link
             to={`/book/${book.id}`}
-            className='rounded bg-blue-500 px-3 py-1 text-sm font-medium text-white transition-colors hover:bg-blue-600'
+            className='rounded bg-skin-accent-dark px-3 py-1 text-sm font-medium text-white transition-colors hover:bg-skin-accent'
           >
             Details
           </Link>

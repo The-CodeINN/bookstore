@@ -12,7 +12,9 @@ export interface VolumeInfo {
     text: boolean;
     image: boolean;
   };
+  pageCount: number;
   printType: string;
+  categories: string[];
   maturityRating: string;
   allowAnonLogging: boolean;
   contentVersion: string;
@@ -23,10 +25,14 @@ export interface VolumeInfo {
   imageLinks?: {
     smallThumbnail: string;
     thumbnail: string;
-    small: string;
-    medium: string;
-    large: string;
-    extraLarge: string;
+    small?: string;
+    medium?: string;
+    large?: string;
+    extraLarge?: string;
+  };
+  panelizationSummary?: {
+    containsEpubBubbles: boolean;
+    containsImageBubbles: boolean;
   };
 }
 
@@ -47,6 +53,7 @@ export interface AccessInfo {
   };
   pdf: {
     isAvailable: boolean;
+    acsTokenLink?: string;
   };
   webReaderLink: string;
   accessViewStatus: string;
@@ -65,7 +72,7 @@ export interface Book {
   volumeInfo: VolumeInfo;
   saleInfo: SaleInfo;
   accessInfo: AccessInfo;
-  searchInfo: SearchInfo;
+  searchInfo?: SearchInfo;
 }
 
 export interface SearchResult {
