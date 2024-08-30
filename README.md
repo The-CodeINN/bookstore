@@ -29,11 +29,13 @@ This web application allows users to search for books using the Google Books API
 ### Installation
 
 1. Clone the repository:
+
    ```
    git clone https://github.com/yourusername/book-search-app.git
    ```
 
 2. Navigate to the project directory:
+
    ```
    cd book-search-app
    ```
@@ -43,19 +45,15 @@ This web application allows users to search for books using the Google Books API
    npm install
    ```
 
-4. Create a `.env` file in the root directory and add your Google Books API key:
-   ```
-   REACT_APP_GOOGLE_BOOKS_API_KEY=your_api_key_here
-   ```
-
 ### Running the Application
 
 1. Start the development server:
+
    ```
-   npm start
+   npm run dev
    ```
 
-2. Open your browser and visit `http://localhost:3000`
+2. Open your browser and visit `http://localhost:5173`
 
 ## Project Structure
 

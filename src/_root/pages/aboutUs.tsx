@@ -1,5 +1,6 @@
-import aboutBanner from "../../assets/images/about.webp";
-import booksCollection from "../../assets/images/books-collection.webp";
+import aboutBanner from '../../assets/images/about.webp';
+import booksCollection from '../../assets/images/books-collection.webp';
+import Breadcrumb from '../../components/pages/breadCrumb';
 
 const AboutUs = () => {
   return (
@@ -15,6 +16,7 @@ const AboutUs = () => {
         </h1>
       </div>
       <main className='padding-x max-width pt-6 lg:px-20'>
+        <Breadcrumb />
         <div className='grid gap-4 pb-12 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-5'>
           <section className='lg:col-span-3'>
             <h2 className='font-serif text-xl font-bold'>Our Mission</h2>

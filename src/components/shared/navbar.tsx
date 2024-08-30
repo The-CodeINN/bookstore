@@ -1,38 +1,40 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Box, Contact, Home, LibraryBig, Menu, Search, X } from "lucide-react";
-import useScroll from "../../libs/useScroll";
-import SocialGroup from "./socialGroup";
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Box, Contact, Home, LibraryBig, Menu, X } from 'lucide-react';
+import useScroll from '../../libs/useScroll';
+import SocialGroup from './socialGroup';
+import SearchBar from './seachBar';
 
 const NavBar = () => {
   const [navClassList, setNavClassList] = useState<string[]>([]);
   const scroll = useScroll();
   const [openNav, setOpenNav] = useState(false);
+  const location = useLocation();
 
   const closeNav = () => {
     setOpenNav(false);
   };
 
   useEffect(() => {
-    document.body.style.overflowY = openNav ? "hidden" : "scroll";
+    document.body.style.overflowY = openNav ? 'hidden' : 'scroll';
   }, [openNav]);
 
   useEffect(() => {
     const _classList = [];
-    if (scroll.y > 25) _classList.push("!shadow");
+    if (scroll.y > 25) _classList.push('!shadow');
     setNavClassList(_classList);
   }, [scroll.y]);
 
   const navLinks = [
-    { name: "Home", href: "/", icon: <Home /> },
-    { name: "About Us", href: "/about-us", icon: <Box /> },
-    { name: "Contact Us", href: "/contact-us", icon: <Contact /> },
+    { name: 'Home', href: '/', icon: <Home /> },
+    { name: 'About Us', href: '/about-us', icon: <Box /> },
+    { name: 'Contact Us', href: '/contact-us', icon: <Contact /> },
   ];
 
   return (
     <>
       <header
-        className={`sticky top-0 z-20 bg-skin-base ${navClassList.join(" ")}`}
+        className={`sticky top-0 z-20 bg-skin-base ${navClassList.join(' ')}`}
       >
         <nav className='relative m-auto flex max-w-6xl items-center justify-between px-4 py-5'>
           <div className='flex md:hidden'>
@@ -57,10 +59,7 @@ const NavBar = () => {
           </div>
 
           <div className='flex items-center gap-x-2 text-lg md:gap-x-4'>
-            <button type='button' title='search' className='p-1'>
-              <Search />
-            </button>
-
+            {location.pathname === '/' && <SearchBar />}
             {navLinks.map((nav) => (
               <Link
                 key={nav.name}
@@ -84,7 +83,7 @@ const NavBar = () => {
       )}
       <div
         className={`fixed top-0 z-30 flex h-screen w-10/12 flex-col items-center overflow-y-scroll bg-skin-base p-4 transition-transform duration-300 md:hidden ${
-          openNav ? "translate-x-0" : "-translate-x-full"
+          openNav ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <button
