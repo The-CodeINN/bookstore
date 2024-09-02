@@ -1,11 +1,12 @@
-import React from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useSearchStore } from "../../store/searchStore";
-import { searchBooks } from "../../services/googleBooksApi";
-import BookCard from "./bookCard";
-import LoadMoreButton from "./loadMoreButton";
-import { Book } from "../../types";
-import CardSkeletons from "./cardSkeleton";
+import React from 'react';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useSearchStore } from '../../store/searchStore';
+import { searchBooks } from '../../services/googleBooksApi';
+import BookCard from './bookCard';
+import LoadMoreButton from './loadMoreButton';
+import { Book } from '../../types';
+import CardSkeletons from './cardSkeleton';
+import { Link } from 'react-router-dom';
 
 interface BooksPage {
   items: Book[];
@@ -32,7 +33,7 @@ const BooksSection: React.FC = () => {
     isPending,
     isError,
   } = useInfiniteQuery({
-    queryKey: ["books", query],
+    queryKey: ['books', query],
     queryFn: ({ pageParam = 0 }) => searchBooks(query, pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
@@ -48,7 +49,7 @@ const BooksSection: React.FC = () => {
     }
   };
 
-  const loadMoreText = isFetchingNextPage ? "Loading..." : "Load More Books";
+  const loadMoreText = isFetchingNextPage ? 'Loading...' : 'Load More Books';
 
   if (isError) return <div>Error fetching data</div>;
 
@@ -68,7 +69,7 @@ const BooksSection: React.FC = () => {
             />
           )}
         </div>
-        <BookList data={data} isPending={isPending} />
+        <BookList data={data} isPending={isPending} query={query} />
         <div className='mt-8 flex items-center justify-center md:hidden'>
           {hasNextPage && (
             <LoadMoreButton
@@ -83,7 +84,13 @@ const BooksSection: React.FC = () => {
   );
 };
 
-const BookList: React.FC<BookListProps> = ({ data, isPending }) => (
+export default BooksSection;
+
+const BookList: React.FC<BookListProps & { query: string }> = ({
+  data,
+  isPending,
+  query,
+}) => (
   <>
     {isPending ? (
       <CardSkeletons num={10} />
@@ -91,7 +98,9 @@ const BookList: React.FC<BookListProps> = ({ data, isPending }) => (
       data.pages.map((page, i) => (
         <div className='cards-container' key={i}>
           {page.items.map((book) => (
-            <BookCard key={book.id} book={book} />
+            <Link key={book.id} to={`/book/${book.id}`} state={{ query, data }}>
+              <BookCard book={book} />
+            </Link>
           ))}
         </div>
       ))
@@ -100,5 +109,3 @@ const BookList: React.FC<BookListProps> = ({ data, isPending }) => (
     )}
   </>
 );
-
-export default BooksSection;

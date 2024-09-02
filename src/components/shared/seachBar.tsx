@@ -5,8 +5,8 @@ import debounce from 'lodash/debounce';
 import SearchIcon from '../../assets/icons/searchIcon';
 
 const SearchBar: React.FC = () => {
+  const { query, setQuery } = useSearchStore();
   const [localQuery, setLocalQuery] = useState('');
-  const { setQuery } = useSearchStore();
   const queryClient = useQueryClient();
 
   const debouncedSetQuery = debounce((value: string) => {
@@ -41,6 +41,12 @@ const SearchBar: React.FC = () => {
     }
   };
 
+  const handleBlur = () => {
+    if (!localQuery.trim()) {
+      setLocalQuery(''); // Clear local input
+    }
+  };
+
   return (
     <div className='flex justify-between'>
       <label className='relative block w-full'>
@@ -49,10 +55,11 @@ const SearchBar: React.FC = () => {
         </span>
         <input
           type='text'
-          placeholder='Find your next favourite book'
+          placeholder={query ? `${query}` : 'Find your next favourite book'}
           value={localQuery}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
+          onBlur={handleBlur}
           className='block w-full rounded border-2 border-skin-base 
         border-opacity-40 bg-skin-base py-3 pl-10
         pr-16 caret-skin-accent placeholder:italic 
