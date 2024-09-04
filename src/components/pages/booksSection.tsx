@@ -8,6 +8,7 @@ import { Book } from '../../types';
 import CardSkeletons from './cardSkeleton';
 import { Link } from 'react-router-dom';
 import withLoading from '../hoc/withLoading';
+import BookNotFound from './bookNotFound';
 
 interface BooksPage {
   items: Book[];
@@ -57,6 +58,8 @@ const BooksSection: React.FC = () => {
 
   const LoadMoreButtonWithHoc = withLoading(LoadMoreButton);
 
+  const totalItems = data?.pages[0]?.totalItems ?? 0;
+
   return (
     <div className='py-14'>
       <section className='mx-auto max-w-6xl px-4 py-6 md:px-8'>
@@ -68,21 +71,27 @@ const BooksSection: React.FC = () => {
             Our Catalog
           </h2>
         </div>
-        <BookList
-          data={data}
-          isPending={isPending}
-          isLoadingMore={isLoadingMore}
-          query={query}
-        />
-        <div className='mt-8 flex items-center justify-center'>
-          {hasNextPage && (
-            <LoadMoreButtonWithHoc
-              onClick={handleLoadMore}
-              text={loadMoreText}
-              disabled={isFetchingNextPage || isLoadingMore}
+        {totalItems === 0 && !isPending ? (
+          <BookNotFound />
+        ) : (
+          <>
+            <BookList
+              data={data}
+              isPending={isPending}
+              isLoadingMore={isLoadingMore}
+              query={query}
             />
-          )}
-        </div>
+            <div className='mt-8 flex items-center justify-center'>
+              {hasNextPage && (
+                <LoadMoreButtonWithHoc
+                  onClick={handleLoadMore}
+                  text={loadMoreText}
+                  disabled={isFetchingNextPage || isLoadingMore}
+                />
+              )}
+            </div>
+          </>
+        )}
       </section>
     </div>
   );
@@ -100,8 +109,8 @@ const BookList: React.FC<BookListProps> = ({
     return <CardSkeletons num={10} />;
   }
 
-  if (!data?.pages.length) {
-    return <div>No books found</div>;
+  if (!data?.pages.length || data.pages[0].totalItems === 0) {
+    return null;
   }
 
   return (
