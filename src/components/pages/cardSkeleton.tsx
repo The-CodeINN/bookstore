@@ -1,5 +1,5 @@
 // import HeartIcon from "@/icons/HeartIcon"
-import { generateUniqueArray } from "../../libs/utils";
+import { generateUniqueArray } from '../../libs/utils';
 
 const CardSkeletons = ({ num, slug }: { num: number; slug?: string }) => {
   // Generate Unique set of numbers array
@@ -22,21 +22,6 @@ const CardSkeletons = ({ num, slug }: { num: number; slug?: string }) => {
             <div className='price mb-3 font-medium'>
               <div className='h-4 w-2/3 animate-pulse bg-slate-200'></div>
             </div>
-            {/* <div className="buttons flex gap-x-2">
-              <button
-                type="button"
-                className="flex-1 animate-pulse rounded bg-slate-200 px-1 text-sm font-semibold text-transparent"
-              >
-                Add To Cart
-              </button>
-              <button
-                type="button"
-                className="bg-skin-border-skin-muted basis-1/4 animate-pulse rounded border border-skin-muted p-1"
-                title="Add To Wishlist"
-              >
-                
-              </button>
-            </div> */}
           </div>
         </div>
       ))}
