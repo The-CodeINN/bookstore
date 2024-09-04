@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getBookDetails } from "../../services/googleBooksApi";
-import notFoundCover from "../../assets/images/cover_not_found.jpg";
-import BookDetailsSkeleton from "../../components/pages/bookDetailsSkeleton";
+import React, { useEffect } from 'react';
+import { useLocation, Link, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { getBookDetails } from '../../services/googleBooksApi';
+import notFoundCover from '../../assets/images/cover_not_found.jpg';
+import BookDetailsSkeleton from '../../components/pages/bookDetailsSkeleton';
 
 const BookDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
+  const { query, data: previousData } = location.state || {};
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,7 +19,7 @@ const BookDetails: React.FC = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["book", id],
+    queryKey: ['book', id],
     queryFn: () => getBookDetails(id!),
   });
 
@@ -35,12 +37,13 @@ const BookDetails: React.FC = () => {
   return (
     <div className='bg-skin-base min-h-screen py-12 overflow-y-auto'>
       <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <a
-          href='/#books'
+        <Link
+          to='/#books'
           className='text-skin-accent hover:text-skin-accent-dark transition-colors duration-200'
+          state={{ query, data: previousData }}
         >
           &larr; Back to Search
-        </a>
+        </Link>
         <div className='mt-8 bg-white shadow-xl rounded-lg overflow-hidden'>
           <div className='md:flex'>
             <div className='md:flex-shrink-0'>
@@ -52,17 +55,17 @@ const BookDetails: React.FC = () => {
             </div>
             <div className='p-8'>
               <div className='uppercase tracking-wide text-sm text-skin-accent font-semibold'>
-                {volumeInfo.categories?.[0] || "Uncategorized"}
+                {volumeInfo.categories?.[0] || 'Uncategorized'}
               </div>
               <h1 className='mt-1 text-4xl font-serif leading-tight font-medium text-skin-dark'>
-                {volumeInfo.title ?? "Unknown Title"}
+                {volumeInfo.title ?? 'Unknown Title'}
               </h1>
               <p className='mt-2 text-skin-dark'>
-                by {volumeInfo.authors?.join(", ") || "Unknown Author"}
+                by {volumeInfo.authors?.join(', ') || 'Unknown Author'}
               </p>
               <div className='mt-4 flex items-center'>
                 <span className='text-skin-dark'>
-                  Published: {volumeInfo.publishedDate || "Unknown"}
+                  Published: {volumeInfo.publishedDate || 'Unknown'}
                 </span>
                 <span className='mx-2'>•</span>
                 <span className='text-skin-dark'>
@@ -88,7 +91,7 @@ const BookDetails: React.FC = () => {
             <p
               className='mt-4 text-skin-dark leading-relaxed'
               dangerouslySetInnerHTML={{
-                __html: volumeInfo.description || "No description available.",
+                __html: volumeInfo.description || 'No description available.',
               }}
             ></p>
           </div>
@@ -99,21 +102,21 @@ const BookDetails: React.FC = () => {
             <dl className='mt-4 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2'>
               <DetailItem
                 title='Publisher'
-                content={volumeInfo.publisher || "Unknown"}
+                content={volumeInfo.publisher || 'Unknown'}
               />
               <DetailItem
                 title='ISBN'
                 content={
-                  volumeInfo.industryIdentifiers?.[0]?.identifier || "N/A"
+                  volumeInfo.industryIdentifiers?.[0]?.identifier || 'N/A'
                 }
               />
               <DetailItem
                 title='Language'
-                content={volumeInfo.language || "Unknown"}
+                content={volumeInfo.language || 'Unknown'}
               />
               <DetailItem
                 title='Print Type'
-                content={volumeInfo.printType || "Unknown"}
+                content={volumeInfo.printType || 'Unknown'}
               />
             </dl>
           </div>

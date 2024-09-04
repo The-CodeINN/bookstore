@@ -31,13 +31,13 @@ This web application allows users to search for books using the Google Books API
 1. Clone the repository:
 
    ```
-   git clone https://github.com/yourusername/book-search-app.git
+   git clone https://github.com/The-CodeINN/bookstore.git
    ```
 
 2. Navigate to the project directory:
 
    ```
-   cd book-search-app
+   cd bookstore
    ```
 
 3. Install dependencies:
@@ -72,7 +72,7 @@ src/
 ├── types/
 │   └── index.ts
 ├── libs/
-│   └── queryProvide.ts
+│   └── queryProvider.ts
 └── App.tsx
 ```
 
@@ -108,3 +108,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is licensed under the MIT License.
+
+---
+
+Made with ❤️ by [TheCodeInn](https://thecodeinn.vercel.app/)
